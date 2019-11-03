@@ -1,0 +1,12 @@
+
+h1{
+  text-align: center;
+}
+table{
+  margin-top: 30px;
+}
+select{
+  background-color: #343A40;
+  color: white;
+  border: 1px solid #343A40;
+}

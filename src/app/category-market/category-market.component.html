@@ -1,0 +1,55 @@
+<div class="container">
+  <button type="button" (click)="openBackDropCustomClass(content)"  class="btn btn-dark">Create</button>
+
+  <table>
+      <tr>
+          <th>Top Category</th>
+          <th>CategoryName</th>
+        
+      </tr>
+      <tr *ngFor="let Cat of Allcategory">
+          <td>{{Cat.topCategory}}</td>
+          <td>{{Cat.categoryName}}</td>
+         
+      </tr>
+
+
+  </table>
+
+
+
+</div>
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4  class="modal-title">New Category</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form [formGroup]="CategoryForm" (ngSubmit)="onSubmit()">
+    <div class="modal-body">
+        <div class="form-group">
+          <label for="codeInput">Category Name</label>
+          <input type="text"  formControlName="CategoryControl" class="form-control" [(ngModel)]='Category.categoryName' id="codeInput"  placeholder="Enter Code">
+  
+          <div class="form-control-feedback" *ngIf="(CategoryForm.get('CategoryControl').invalid && CategoryForm.get('CategoryControl').dirty)||(CategoryForm.get('CategoryControl').invalid && CategoryForm.get('CategoryControl').touched)">
+              <p *ngIf="CategoryForm.get('CategoryControl').errors['required']"> Category Name is Required</p>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="nameInput">Top Category</label>
+            <select formControlName="TopCategoryControl" class="form-control" [(ngModel)]='Category.topCategory'>
+                <option [ngValue]="''">Select</option>
+                <option *ngFor="let cat of Allcategory" [ngValue]="cat.categoryName">{{cat.categoryName}}</option>
+              </select>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="submit" [disabled]="CategoryForm.invalid"  class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+  </ng-template>
+
